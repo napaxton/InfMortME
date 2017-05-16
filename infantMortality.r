@@ -42,15 +42,12 @@ lm14 <- lm(imr ~ year, data=filter(bdn, state == "Maine", year > 2004 ))
 
 m2 <- ggplot(data=filter(bdn, state=="Maine"), aes(year, imr))  +
   geom_point() +
-  geom_smooth(method = "lm", color = "red", se=F) +
+  geom_smooth(method = "lm", color = "red") +
   geom_smooth(method="lm", aes(), data=filter(bdn, year<= 2004, state == "Maine")) +
   geom_smooth(method="lm", aes(), data=filter(bdn, year > 2004, state == "Maine")) +
   ggtitle(label="Infant Mortality in Maine, 1995-2014", 
           subtitle="Subset by decades: 1995-2004, 2005-2014") +
   labs(y = "Infant Mortality (per 1000 live births)", x = "Year")
-
-# Turn off CIs by adding "se=F" parameter to geom_smooth() call; m2 + geom_smooth(se=F)
-# geom_line(linetype=)
 
 m3 <- ggplot(data=bdn.sub, aes(year, imr, group=state))  +
   geom_point() +
@@ -104,26 +101,3 @@ mortPlot <- function(data, x, y, method = "lm", color = "red", cutyear=2004, fac
 # m + method=lm
 # smooth(method="lm")
 
-
-    geom_smooth(method="lm", aes(), data=filter(bdn.sub, year<= 2004)) +
-    geom_smooth(method="lm", data=filter(bdn.sub, year > 2004)) +
-    facet_wrap(~state) +
-    ggtitle(label="Infant Mortality in selected states, 1995-2014",
-            subtitle="Subset by decades: 1995-2004, 2005-2014") +
-    labs(y = "Infant Mortality (per 1000 live births)", x = "Year")
-
-m3 +  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 0.75) )
-m3 + scale_x_date(date_breaks="2 years")
-
-# # Function version of ggplot call above? 
-# mortPlot <- function(data, x, y, method = "lm", color = "red", cutyear=2004, facet=state){
-#     ggplot2::ggplot(data, aes(x,y)) +
-#         geom_point() +
-#         geom_smooth(method = "lm", color = "red") +
-#         geom_smooth(method="lm", aes(), data=filter(data, year<= cutyear)) +
-#         geom_smooth(method="lm", data=filter(data, year > cutyear)) +
-#         facet_wrap(~facet) +
-#         ggtitle(label="Infant Mortality in selected states, 1995-2014",
-#                 subtitle="Subset by decades: 1995-2004, 2005-2014") +
-#         labs(y = "Infant Mortality (per 1000 live births)", x = "Year")
-# }
