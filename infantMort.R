@@ -54,6 +54,19 @@ lm14 <- lm(imr ~ year, data=filter(bdn, state == "Maine", year > 2004 ))
 m2 <- ggplot(data=filter(bdn, state=="Maine"), aes(year, imr))  +
   geom_point() +
   geom_smooth(method = "lm", color = "red", se=F) +
+  geom_smooth(method="lm", aes(), data=filter(bdn, year<= 2004, state == "Maine") ) +
+  geom_smooth(method="lm", aes(), data=filter(bdn, year > 2004, state == "Maine") ) +
+  ggtitle(label="Infant Mortality in Maine, 1995-2014", 
+          subtitle="Subset by decades: 1995-2004, 2005-2014") +
+  labs(y = "Infant Mortality (per 1000 live births)", x = "Year")
+
+# tiff(file="ME-imr~year", width=1200, height=765)
+# m2
+# dev.off
+
+m2.1 <- ggplot(data=filter(bdn, state=="Maine"), aes(year, imr))  +
+  geom_point() +
+  geom_smooth(method = "lm", color = "red", se=F) +
   geom_smooth(method="lm", aes(), data=filter(bdn, year<= 2004, state == "Maine"), se=F) +
   geom_smooth(method="lm", aes(), data=filter(bdn, year > 2004, state == "Maine"), se=F) +
   geom_line(linetype=3) +
@@ -61,17 +74,40 @@ m2 <- ggplot(data=filter(bdn, state=="Maine"), aes(year, imr))  +
           subtitle="Subset by decades: 1995-2004, 2005-2014") +
   labs(y = "Infant Mortality (per 1000 live births)", x = "Year")
 
+# tiff(file="ME-imr~year-noCI-time", width=1200, height=765)
+# m2.1
+# dev.off
 
 m3 <- ggplot(data=bdn.sub, aes(year, imr, group=state))  +
+  geom_point() +
+  geom_smooth(method = "lm", color = "red" ) +
+  geom_smooth(method="lm", aes(), data=filter(bdn.sub, year<= 2004) ) +
+  geom_smooth(method="lm", data=filter(bdn.sub, year > 2004) ) +
+  facet_wrap(~state) +
+  ggtitle(label="Infant Mortality in selected states, 1995-2014", 
+          subtitle="Subset by decades: 1995-2004, 2005-2014") +
+  labs(y = "Infant Mortality (per 1000 live births)", x = "Year")
+
+# tiff(file="IMR~yearByState", width=1200, height=765, type="cairo")
+# m3
+# dev.off
+
+m3.1 <- ggplot(data=bdn.sub, aes(year, imr, group=state))  +
   geom_point() +
   geom_smooth(method = "lm", color = "red", se=F) +
   geom_smooth(method="lm", aes(), data=filter(bdn.sub, year<= 2004), se=F) +
   geom_smooth(method="lm", data=filter(bdn.sub, year > 2004), se=F) +
+  geom_line(linetype=3) +
   facet_wrap(~state) +
   ggtitle(label="Infant Mortality in selected states, 1995-2014", 
           subtitle="Subset by decades: 1995-2004, 2005-2014") +
  labs(y = "Infant Mortality (per 1000 live births)", x = "Year")
 
+# tiff(file="IMR~yearByState-time", width=1200, height=765)
+# m3.1
+# dev.off
+
+# ----------
 m3 +  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 0.75) )
 m3 +  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 0.75) ) + geom_line(linetype=3)
 
