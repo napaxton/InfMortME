@@ -74,6 +74,16 @@ m2.1 <- ggplot(data=filter(bdn, state=="Maine"), aes(year, imr))  +
           subtitle="Subset by decades: 1995-2004, 2005-2014") +
   labs(y = "Infant Mortality (per 1000 live births)", x = "Year")
 
+# m2.1s <- ggplot(data=filter(bdn, state=="Maine", year >= 2000), aes(year, imr))  +
+#     geom_point() +
+#     geom_smooth(method = "lm", color = "red", se=F) +
+#     geom_smooth(method="lm", aes(), data=filter(bdn, year > 1999 & year <= 2007, state == "Maine"), se=F) +
+#     geom_smooth(method="lm", aes(), data=filter(bdn, year > 2007, state == "Maine"), se=F) +
+#     geom_line(linetype=3) +
+#     ggtitle(label="Infant Mortality in Maine, 1995-2014", 
+#             subtitle="Subset by decades: 1995-2004, 2005-2014") +
+#     labs(y = "Infant Mortality (per 1000 live births)", x = "Year")
+#
 # tiff(file="ME-imr~year-noCI-time", width=1200, height=765)
 # m2.1
 # dev.off
