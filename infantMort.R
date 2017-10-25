@@ -2,7 +2,6 @@ library(tidyverse); library(dplyr)
 
 ##  Load data ##
 # bdn <- read_tsv("https://github.com/jakeemerson/maine_infant_mortality_data/raw/master/data/us_infant_mortality_2.tsv")
-bdn <- read_tsv("C:/Users/np45344/DataAnalysis/InfantMort/us_infant_mortality_2.tsv")
 
 
 ##  Transform all data  ##
