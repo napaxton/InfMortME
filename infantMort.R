@@ -2,12 +2,13 @@ library(tidyverse); library(dplyr)
 
 ##  Load data ##
 # bdn <- read_tsv("https://github.com/jakeemerson/maine_infant_mortality_data/raw/master/data/us_infant_mortality_2.tsv")
+bdn <- read_tsv("~/GitHub/InfMortME/us_infant_mortality_2.tsv")
 
 
 ##  Transform all data  ##
 bdn <- bdn %>%
   gather(datecat, measure, 2:61, convert=T) %>%
-  separate(datecat, c("year","infant"), sep="_") %>%
+  separate(datecat, c("year","infant"), sep="_", convert = T) %>%
   spread(infant, measure) %>%
   rename(state = X1, births = Births, deaths = Deaths, imr = IMR)
 
