@@ -171,7 +171,7 @@ mortPlot <- function(data, x, y, method = "lm", color = "red", cutyear=2004, fac
     labs(y = "Infant Mortality (per 1000 live births)", x = "Year")
 
 m3 +  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 0.75) )
-m3 + scale_x_date(date_breaks="2 years")
+# m3 + scale_x_date(date_breaks="2 years")
 
 # # Function version of ggplot call above? 
 # mortPlot <- function(data, x, y, method = "lm", color = "red", cutyear=2004, facet=state){
